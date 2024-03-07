@@ -28,9 +28,8 @@
 // Expected Output: 5
 // Justification: Since there’s only one element, it is the sum itself.
 
-const arr = [[1, 2, 3],
-             [4, 5, 6],
-             [7, 8, 9]]
+const arr = [[1,0],
+[0,1]]
 
 
 
@@ -38,15 +37,19 @@ const diagonalSum = (arr) => {
 
     let sum1 = 0
     let sum2 = 0
+    let mid = 0
 
     for (let i = 0; i < arr.length; i++) {
         sum1 += arr[i][i];
         sum2 += arr[i][(arr.length-1)-i]
     }
-    let mid = Math.floor( arr.length/2)
+
+    if(arr.length%2 !==0 ){
+        mid = Math.floor( arr.length/2)
+    }
           
 
-    return sum1+sum2-(arr[mid][mid])
+    return sum1+sum2-mid
 }
 
 console.log(diagonalSum(arr))
