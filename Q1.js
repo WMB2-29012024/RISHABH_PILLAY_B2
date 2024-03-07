@@ -50,6 +50,7 @@ const diagonalSum = (arr) => {
           
 
     return sum1+sum2-mid
+    
 }
 
 console.log(diagonalSum(arr))
