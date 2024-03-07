@@ -39,13 +39,15 @@ const diagonalSum = (arr) => {
     let sum2 = 0
     let mid = 0
 
+
     for (let i = 0; i < arr.length; i++) {
         sum1 += arr[i][i];
         sum2 += arr[i][(arr.length-1)-i]
     }
 
     if(arr.length%2 !==0 ){
-        mid = Math.floor( arr.length/2)
+        let hlaf = Math.floor( arr.length/2);
+        mid= arr[hlaf][hlaf];
     }
           
 
