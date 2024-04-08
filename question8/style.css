@@ -1,0 +1,52 @@
+*{
+    /* margin: 0;
+    padding: 0;
+    box-sizing: border-box; */
+}
+html,body{
+    height: 100%;
+    width: 100%;
+}
+#main{
+    height: 100vh;
+    width: 100vw;
+}
+#fetch_button{
+    height: 30px;
+    width: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 2px;
+}
+
+
+.loader-container{
+    
+  
+   display: none;
+
+}
+.loader {
+    height: 12px;
+    width: 12px;
+    border: 2px solid rgb(235, 232, 232);
+    border-top: 2px solid blue;
+    border-radius: 50%;
+    
+    animation: spin 1s linear infinite;
+
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(120deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
