@@ -46,17 +46,22 @@ nav{
     
     
 
-aside{
-    height: calc(100vh - 55px);
-    width: 0;
-    background-color: #333;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding: 20px;
-    display: none;
-}
+    aside {
+        padding-top: 20px;
+        height: calc(100vh - 55px);
+        width: 0px;
+        background-color: #333;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        overflow: hidden;
+        transition: cubic-bezier(0.455, 0.03, 0.515, 0.955)1s;
+      }
+
+
 aside a{
+    /* margin-top: 20px; */
+    margin-left: 20px;
     color: #fff;
     text-decoration: none;
     display: none;
