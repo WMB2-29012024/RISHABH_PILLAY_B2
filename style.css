@@ -1,0 +1,186 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+    
+
+}
+
+main {
+
+    background-color: #dadadd;
+    
+}
+
+nav {
+    height: 52px;
+    background-color: #fff;
+}
+
+.container {
+
+    >.content-container {
+        width: 1128px;
+        /* background-color: blue; */
+        margin: 24px auto 0 ;
+        display: flex;
+        gap: 25px;
+
+
+
+        >section {
+            width: inherit;
+            /* background-color: rgb(186, 122, 45); */
+
+
+            >.user-details {
+                border-radius: 10px;
+                overflow: hidden;
+                background-color: #fff;
+                margin-bottom: 25px;
+
+
+                >.cover-photo {
+                    height: 201px;
+                    background-color: rgb(99, 136, 189);
+                    position: relative;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    overflow: hidden;
+
+                    >#preview {
+                        width: 100%;
+                        display: none;
+
+                    }
+
+
+                    >#edit-button-label {
+
+                        height: 30px;
+                        width: 30px;
+                        border-radius: 50%;
+                        background-color: #fff;
+                        position: absolute;
+                        right: 10px;
+                        top: 10px;
+                        border: none;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+
+                    >#edit-button {
+                        display: none;
+                    }
+
+                   
+
+
+                }
+
+                >.text {
+                    height: 201px;
+                    position: relative;
+
+                    >.user-photo {
+                        height: 152px;
+                        width: 153px;
+                        border-radius: 50%;
+                        background-color: #dadada;
+                        position: absolute;
+                        transform: translate(20px, -60%);
+                        border: 5px solid #fff;
+                        cursor: pointer;
+                       
+                    }
+                    >.user-photo-edit-button-container{
+                        display: flex;
+                        justify-content: right;
+
+
+                       >#user-photo-edit-button-label{
+
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        margin: 10px;
+
+                        height: 30px;
+                        width: 30px;
+                        background-color: #dadadd;
+                        border-radius: 50%;
+
+                       }
+                       
+                       >#user-photo-edit-button{
+                        display: none;
+                       }
+
+
+                    }
+
+
+
+
+
+
+
+
+                }
+            }
+
+        }
+
+        >aside {
+            width: 300px;
+            height: 10px;
+            background-color: #fff;
+
+            border-radius: 10px;
+
+        }
+    }
+}
+
+#user-photo-edit-container{
+
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translate(-50% , 0%);     
+    height: 500px;
+    width: 700px;   
+    background-color: #333;
+    border-radius: 10px;
+    /* display: none; */
+
+    > #user-photo-edit-container-close-button{
+        height: 30px;
+        width: 30px;
+        border-radius: 50%;
+        border: none;
+        background-color: #dadada;
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        cursor: pointer;
+
+    }
+
+
+}
+
+
+
+
+
+
+  
