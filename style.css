@@ -55,6 +55,8 @@ nav{
         flex-direction: column;
         gap: 20px;
         overflow: hidden;
+        display: none;
+
         transition: cubic-bezier(0.455, 0.03, 0.515, 0.955)1s;
       }
 
@@ -80,6 +82,11 @@ aside a{
     .hamburger{
         display: inline;
         color: #fff;
+    }
+    aside{
+        display: block;
+
+
     }
    
 }
