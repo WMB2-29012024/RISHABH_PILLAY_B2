@@ -1,171 +1,66 @@
-const editButtonLabelElem = document.querySelector('#edit-button-label');
-const imagePreview = document.getElementById('preview');
-const imageInput = document.getElementById('edit-button'); 
-const userPhotoElem = document.querySelector('.user-photo');
-const userPhotoEditContainerElem = document.querySelector('#user-photo-edit-container');
-const userPhotoEditContainerCloseButton = document.querySelector('#user-photo-edit-container-close-button')
+import { photoUploader } from "./uploadPhoto.js";
+import { accessCamera, captureButton , resetButton , turnOffCamera  } from "./accessCamera.js";
 
 
-imageInput.addEventListener('change', function () {
-    const file = this.files[0]; // Get the selected file
+const editCoverPhotoInputElem = document.getElementById('edit-cover-photo-input');
+const coverPhotoImg = document.getElementById('cover-photo-img');
 
-    if (file) {
-        const reader = new FileReader(); // Initialize a FileReader object
-        reader.onprogress = function (e) {
-           
-        };
-        reader.onload = function (e) {
-            imagePreview.style.display =  'initial';
-            // Set the source of the image element to the result of FileReader
-            imagePreview.src = e.target.result;
-           
-        };
-        // Read the selected file as a Data URL
-        reader.readAsDataURL(file);
-    } else {
-        // If no file is selected, display a default image
-        imagePreview.src = '#';
-      
-    }
+const userPhotoContainerElem = document.querySelector('.user-photo-container');
+const userPhotoEditContainerElem = document.getElementById('user-photo-edit-container');
+const userPhotoEditContainerCloseButton = document.getElementById('user-photo-edit-container-close-button');
+const userPhotoImgElem = document.querySelector('#user-photo-img');
+
+const editUserPhotoInputElem = document.getElementById('edit-user-photo-input');
+const userPhotoPreviewImgElem = document.getElementById('user-photo-preview-img');
+const editUserPhotoSaveButtonElem = document.querySelector("#edit-user-photo-save-button");
+
+const editUserPhotoCameraButtonElem = document.querySelector('#edit-user-photo-camera-button');
+const editUserPhotoCameraCaptureButton = document.querySelector('#edit-user-photo-camera-capture-button');
+
+editCoverPhotoInputElem.addEventListener('change', function () {
+    photoUploader(coverPhotoImg, this.files);
 });
 
-
-userPhotoElem.addEventListener('click', () => {
-
+userPhotoContainerElem.addEventListener('click', () => {
     userPhotoEditContainerElem.style.display = 'initial';
 });
-
 userPhotoEditContainerCloseButton.addEventListener('click', () => {
-
+    turnOffCamera()
     userPhotoEditContainerElem.style.display = 'none';
 });
 
-
-
-
-document.addEventListener("DOMContentLoaded", function () {
-    const videoElement = document.getElementById("video-preview");
-    const canvasElement = document.getElementById("canvas-preview");
-    const captureButton = document.getElementById("capture-btn");
-    const switchOnCameraButton = document.getElementById("switch-on-camera-btn");
-    const saveButton = document.getElementById("save-btn");
-    const capturedImageElement = document.getElementById("captured-image");
-    const imageNameInput = document.getElementById("image-name-input");
-    const savedImagesList = document.getElementById("saved-images-list");
-    let isCameraOn = false;
-    let stream = null;
-    // Function to access the camera
-    function accessCamera() {
-      if (!isCameraOn) {
-        navigator.mediaDevices
-          .getUserMedia({
-            video: true
-          })
-          .then(function (videoStream) {
-            stream = videoStream;
-            videoElement.srcObject = stream;
-            videoElement.style.display = "block";
-            captureButton.style.display = "block";
-            isCameraOn = true;
-            switchOnCameraButton.textContent = "Switch Off Camera";
-          })
-          .catch(function (error) {
-            console.error("Error accessing the camera:", error);
-          });
-      } else {
-        stream.getTracks().forEach((track) => {
-          track.stop();
-        });
-        videoElement.srcObject = null;
-        videoElement.style.display = "none";
-        captureButton.style.display = "none";
-        isCameraOn = false;
-        switchOnCameraButton.textContent = "Switch On Camera";
-      }
-    }
-    switchOnCameraButton.addEventListener("click", accessCamera);
-    // Capture button click event
-    captureButton.addEventListener("click", function () {
-      const context = canvasElement.getContext("2d");
-      // Set canvas size to match video
-      canvasElement.width = videoElement.videoWidth;
-      canvasElement.height = videoElement.videoHeight;
-      // Draw video frame onto canvas
-      context.drawImage(
-        videoElement,
-        0,
-        0,
-        canvasElement.width,
-        canvasElement.height
-      );
-      // Convert canvas to image data URL
-      const imageDataUrl = canvasElement.toDataURL("image/png");
-      // Display captured image
-      capturedImageElement.src = imageDataUrl;
-      capturedImageElement.style.display = "block";
-      // Show input field for image name
-      imageNameInput.style.display = "block";
-      // Show save button
-      saveButton.style.display = "block";
+editUserPhotoInputElem.addEventListener('change', function () {
+    photoUploader(userPhotoPreviewImgElem, this.files);
+    editUserPhotoSaveButtonElem.addEventListener('click', () => {
+        userPhotoEditContainerElem.style.display = 'none';
+        userPhotoImgElem.src = userPhotoPreviewImgElem.src;
+        userPhotoImgElem.style.display = 'initial';
     });
-    // Save button click event
-    saveButton.addEventListener("click", function () {
-      // Get the data URL of the captured image
-      const imageDataUrl = capturedImageElement.src;
-      // Get the name entered by the user
-      const imageName = imageNameInput.value;
-      if (imageName.trim() === "") {
-        alert("Please enter a name for the image.");
-        return;
-      }
-      // Save the image data URL to localStorage with the provided name as the key
-      localStorage.setItem(imageName, imageDataUrl);
-      // Inform the user that the image has been saved
-      alert("Image saved to localStorage!");
-      // Hide captured image, input field, and save button
-      capturedImageElement.style.display = "none";
-      imageNameInput.style.display = "none";
-      saveButton.style.display = "none";
-      // Clear input field value
-      imageNameInput.value = "";
-      // Update saved images list
-      updateSavedImagesList();
+});
+
+editUserPhotoCameraButtonElem.addEventListener('click', () => {   
+
+    let flag = 0
+
+    accessCamera();  
+    
+    editUserPhotoCameraCaptureButton.addEventListener('click', function () {
+        if (flag===0) {
+            editUserPhotoCameraCaptureButton
+            captureButton()
+            flag = 1
+            editUserPhotoSaveButtonElem.addEventListener('click', () => {
+                turnOffCamera()
+                userPhotoEditContainerElem.style.display = 'none';
+                userPhotoImgElem.style.display = 'initial';
+                userPhotoImgElem.src = userPhotoPreviewImgElem.src;
+            });            
+        }else{
+            resetButton()
+            flag = 0
+
+        }
+
+
     });
-    // Function to remove an image from localStorage
-    function removeImage(key) {
-      localStorage.removeItem(key);
-      // Update saved images list
-      updateSavedImagesList();
-    }
-    // Function to update saved images list
-    function updateSavedImagesList() {
-      savedImagesList.innerHTML = "";
-      // Get all keys (image names) from localStorage
-      const keys = Object.keys(localStorage);
-      // Create list items for each image name
-      keys.forEach(function (key) {
-        const listItem = document.createElement("li");
-        listItem.textContent = key;
-        listItem.addEventListener("click", function () {
-          // Display the selected image
-          const imageDataUrl = localStorage.getItem(key);
-          capturedImageElement.src = imageDataUrl;
-          capturedImageElement.style.display = "block";
-        });
-        // Create remove button
-        const removeBtn = document.createElement("button");
-        removeBtn.textContent = "Remove";
-        removeBtn.className = "remove-btn";
-        removeBtn.addEventListener("click", function () {
-          removeImage(key);
-        });
-        // Append remove button to list item
-        listItem.appendChild(removeBtn);
-        // Append list item to saved images list
-        savedImagesList.appendChild(listItem);
-      });
-    }
-    // Initial update of saved images list
-    updateSavedImagesList();
-  });
-  
+});
