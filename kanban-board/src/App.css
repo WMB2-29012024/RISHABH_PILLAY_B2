@@ -1,0 +1,9 @@
+.App {
+  display: flex;
+  align-items: start;
+  justify-content: flex-start;
+  gap: 20px;
+  padding: 10px;
+
+}
+
